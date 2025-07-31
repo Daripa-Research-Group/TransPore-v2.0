@@ -1,107 +1,148 @@
-# TransPore Version 2.0 2023
+# TransPore v2.0
 
-•	A FEM-FDM solver for two-phase, multicomponent transport in porous media with non-Newtonian (shear-thinning) effects for polymer component
+A FEM-FDM solver for two-phase, multicomponent transport in porous media. This version includes non-Newtonian (shear-thinning) effects for the polymer component.
 
-GENERAL USAGE NOTES
-=====================
-•	Requirements: MATLAB 2017a or higher, Windows/Linux/MacOS
-•	E-mail: daripa@math.tamu.edu
-•	Copyright 2010-2018 TransPore developers and contributors. All rights reserved.
-•	References: 
-•	Daripa, P. & Mishra, R. (2023) Modelling shear thinning polymer flooding using a dynamic viscosity model arXiv preprint arXiv:2301.04290
-•	Daripa, P. & Dutta, S. (2017) Modeling and simulation of surfactant–polymer flooding using a new hybrid method. J. Comput. Phys., 335, 249–282.
-https://doi.org/10.1016/j.jcp.2017.01.038
-•	Daripa, P. & Dutta, S. (2019) On the convergence analysis of a hybrid method for multicomponent transport in porous media, Appl. Numer. Math., 146 (2019), pp. 199-220. https://doi.org/10.1016/j.apnum.2019.07.009
+---
 
+## 📋 General Information
+* **Requirements**: MATLAB R2017a or higher on Windows, Linux, or macOS.
+* **Contact**: For questions or support, please email `daripa@math.tamu.edu`.
+* **Copyright**: © 2010-2018 TransPore developers and contributors. All rights reserved.
 
-•	Funding for this research was provided by:
-•	Qatar National Research Fund (08-777-1-141)
-•	National Science Foundation (DMS-1522782)
+---
 
-Primary SOURCE FILE
-===================
-Master_surf_grid.m
-Variables and Data Structure:
-nsim - number of different flooding simulations
-sizeofgrid - Nx x Ny grid sizes for each simulation   
-c0iter, g0iter - nsim arrays of concentrations of components 1 & 2 respectively in the injected fluid for each simulation
-f - source term for the elliptic problem. Nx x Ny matrix with non-zero intensities at injection and production wells
-KK - Nx x Ny matrix with absolute permeability values for the domain
-UU, CC, GG - Nx x Ny matrices for space-time values of wetting phase saturation, components 1 & 2 concentrations respectively 
-miuw, miuo - wetting and non-wetting fluid base viscosities respectively
-swr0, sor0 - wetting and non-wetting phase initial residual saturations respectively
-sigma - Nx x Ny matrix for interfacial tension values over the domain
-miua - Nx x Ny matrix for aqueous phase saturation values over the domain
-lamba_a, lambda_o - Nx x Ny matrices for wetting phase and non-wetting phase mobility values over the domain 
-u,v - Nx x Ny matrices for x-direction and y-direction total velocity values over the domain. Note: These are obtained by solving the global pressure equation and are different from phase velocities
+## 💰 Funding
+This research was made possible by funding from:
+* Qatar National Research Fund (08-777-1-141)
+* National Science Foundation (DMS-1522782)
 
-Secondary SOURCE FILES
-=====================
-KKdef() - function implementing different types of homogeneous, heterogeneous, stochastic, piecewise constant absolute permeability profiles
-s0c0() - function implementing initial configurations and injection profiles for each simulation.
-compvis(), compres(), compmob() - functions to update phase viscosities, phase residual saturations and phase mobility values with the evolution of state variables
-setGrid(), setRightHand(), setA(), setB(), getu(), get_vn() - functions implementing various parts of the elliptic solver for the global pressure and total velocities
-nmmoc_surf_mod_neumann() - function implementing the MMOC-FD procedure for solving the component transport equations 
-  
+---
 
-Instructions to run the code with Non-Newtonian modeling
+## 📚 Citing this Work
+If you use this code in your research, please cite the relevant publications:
 
-Follow these steps to run the non-Newtonian TransPore code:
-1.	Unpack the code to your local directory
-2.	The code is designed in such a way that minimum access is required to other sub-routines and most of the changes can be made from the master file (master_surf_grid.m).
-3.	Different configurations can be set up based on the flags in the first 150 lines of the master_surf_grid.m which is the main file in the code.
-4.	Although, there are lot of parameters that can be changed, the main ones that govern the simulations and are important are listed as :
+1.  **Daripa, P. & Mishra, R. (2023).** Modelling shear thinning polymer flooding using a dynamic viscosity model. *arXiv preprint arXiv:2301.04290*.
+2.  **Daripa, P. & Dutta, S. (2017).** Modeling and simulation of surfactant–polymer flooding using a new hybrid method. *Journal of Computational Physics, 335*, 249–282. [https://doi.org/10.1016/j.jcp.2017.01.038](https://doi.org/10.1016/j.jcp.2017.01.038)
+3.  **Daripa, P. & Dutta, S. (2019).** On the convergence analysis of a hybrid method for multicomponent transport in porous media. *Applied Numerical Mathematics, 146*, 199-220. [https://doi.org/10.1016/j.apnum.2019.07.009](https://doi.org/10.1016/j.apnum.2019.07.009)
 
-```
-nsim =1;
-sog=29;
+---
+
+## 📁 File Structure
+
+### Primary Source File
+The main file for setting up and running simulations. Most parameters are configured here.
+* `Master_surf_grid.m`
+
+### Secondary Source Files
+These files contain helper functions called by the master script.
+* `KKdef()`: Implements various permeability profiles (homogeneous, heterogeneous, etc.).
+* `s0c0()`: Sets initial configurations and injection profiles.
+* `compvis()`, `compres()`, `compmob()`: Update phase viscosities, residual saturations, and mobilities.
+* `setGrid()`, `setRightHand()`, `setA()`, `setB()`, `getu()`, `get_vn()`: Implement parts of the elliptic solver for global pressure and total velocity.
+* `nmmoc_surf_mod_neumann()`: Implements the MMOC-FD procedure for solving component transport equations.
+
+---
+
+## 🔬 Key Variables & Data Structures
+The primary variables are stored as `Nx x Ny` matrices.
+* `nsim`: Number of flooding simulations to run.
+* `sizeofgrid`: An array specifying the `Nx x Ny` grid sizes for each simulation.
+* `c0iter`, `g0iter`: Arrays of injected concentrations for components 1 & 2.
+* `f`: Source term matrix for the elliptic problem, with non-zero values at injection/production wells.
+* `KK`: Absolute permeability matrix for the domain.
+* `UU`, `CC`, `GG`: Space-time values for wetting phase saturation (UU), component 1 concentration (CC), and component 2 concentration (GG).
+* `miuw`, `miuo`: Base viscosities for the wetting and non-wetting fluids.
+* `swr0`, `sor0`: Initial residual saturations for the wetting and non-wetting phases.
+* `sigma`: Interfacial tension over the domain.
+* `miua`: Aqueous phase viscosity over the domain.
+* `lamba_a`, `lambda_o`: Wetting phase and non-wetting phase mobility values.
+* `u`, `v`: Total velocity components in the x and y directions.
+
+---
+
+## 🚀 Running a Simulation
+
+Follow these steps to configure and run the non-Newtonian TransPore code.
+
+**1. Unpack the Code**: Extract the files to a local directory.
+
+**2. Configure the Master File**: Open `master_surf_grid.m`. All primary simulation parameters can be adjusted within the first ~150 lines.
+
+### Key Configuration Parameters
+
+#### **Simulation Count & Grid Size**
+Set the number of simulations (`nsim`) and the grid size (`sog`). The domain is a square grid of `sog` x `sog` cells.
+
+```matlab
+nsim = 1;
+sog = 29; % Sets the number of mesh cells (e.g., 29x29)
 sizeofgrid = [sog sog sog sog];
-c0iter = [0.001 0 0 0.001 ]; %0.0002 (300 wppm) 0.0006 (900 wpppm) 0.001 (1500 wpppm)
-g0iter = [0 0 0 0]; %[0.01 0.01 0.01];
-Here, if you wish you can run 4 or more simulations in one go. The nsim entity ensures the number of simulations to be executed (currently set to 1 which means only 1 simulation will run during code execution). For each of one of these simulations, different values of IPC (c0) and ISC (g0) can be assigned from the array c0iter and g0iter. The sog parameter is quite important as it sets the number of mesh cells in the domain. The number of cells in x and y are the same and is equal to the sog value. 
-src = 120000
-```
+Injected Fluid Concentrations
+Define the initial concentrations for each component for each simulation.
 
-src is the IR which determines how fast the injected fluid will move through the domain. The values are selected in such a way that the generated shear is within the range of the empirical constants for the polymer. The range is between 10,000 to 120,000. 
-```
-    %% Rectilinear propagation
-    f(:,1)=src;                           % intensity of injection well = src
-    f(:,para.box.m+1)=-src;    % intensity of production well = -src
+Matlab
 
-%     %% Quarter-five spot
-%   f(1,1)=src;                           % intensity of injection well = src
-%   f(para.box.n+1,para.box.m+1)=-src;    % intensity of production well = -src
-```
-This part of the code will select either rectilinear or quarter five spot geometry. Comment out the one that is not being used.
+% c0iter: Polymer concentration (e.g., 0.001 = 1500 wppm)
+c0iter = [0.001 0 0 0.001];
+% g0iter: Surfactant concentration
+g0iter = [0 0 0 0];
+Injection Rate & Well Geometry
+src determines the injection rate (IR). The geometry (well placement) can be set to rectilinear or quarter-five spot.
 
-KKdef(counter,sizeofgrid,x,y,permeabilityFlag);
+Matlab
 
-This defines the permeability matrix. Notice the permeability flag can be chosen according to the following:
-```
-    %%%%%%%   Defining permeability matrix    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % flag values:  1 = homogeneous with magnitude 1000
-    %               2 = continuous heterogeneous function
-    %               3 = impermeable block inclusion at the center
-    %               4 = impermeable block inclusion off the center
-    %               5 = Upper Ness from SPE10 model sections
-    %               6 = Tabert from SPE10 model sections
-s0=0.79;  % initial residual water saturation inside the reservoir = 1-s0
-1-s0 defines the initial water saturation. This means that the oil field is not fully composed of oil initially but a mixture of oil and water in 0.79 (oil) and 0.21 (water).
+% Recommended range: 10,000 to 120,000
+src = 120000;
 
-viscosityFlag = 3; %Flag to enable different viscosity models
-    % 3 = Dynamic Viscosity Model (Non-Newtonian model)
-    % 2 = Sourav's Model
-    % 1 = Original model from JCP paper
-    
-polymerType = 0; %Flag to initialize with a particular polymer
-    % 0 = Xanthane
-    % 1 = Schizophyllan
-```
-These flags are essential as they indicate which viscosity model and polymer is chosen. To enable the non-Newtonian model set the viscosityFlag to 3.
+% Choose a geometry by uncommenting the desired block
+%% Rectilinear propagation
+f(:,1) = src;          % Injection well
+f(:,para.box.m+1) = -src; % Production well
 
-Note: phi_test=get_phi_test(para); 
+%% Quarter-five spot
+% f(1,1) = src;                                % Injection well
+% f(para.box.n+1,para.box.m+1) = -src;         % Production well
+Permeability Profile
+Use the permeabilityFlag to select the domain's permeability profile.
 
-This calls a function get_phi_test which in turn calls z_func_test. To change the shape of the initial conditions and to move from rectilinear to quarter five spot go to the z_func_test and change the function based on the comments.
+Matlab
 
-5.	Once you are confident with your setup, you can run the simulation. It will take around 2-3hrs to finish a simulation if the sog is 29. Increasing the value of sog increases the computational time exponentially.
-6.	Main post-processing variables are COC, MFW, CC, UU, GG. Depending on what kind of results you want to analyze you can plot those variables. 
+% 1 = Homogeneous (1000 mD)
+% 2 = Continuous heterogeneous function
+% 3 = Impermeable block at the center
+% 4 = Impermeable block off-center
+% 5 = Upper Ness (from SPE10 model)
+% 6 = Tarbert (from SPE10 model)
+permeabilityFlag = 3;
+KKdef(counter, sizeofgrid, x, y, permeabilityFlag);
+Initial Water Saturation
+The value 1-s0 defines the initial water saturation in the reservoir.
+
+Matlab
+
+s0 = 0.79; % Initial oil saturation
+% Corresponds to an initial water saturation of 1 - 0.79 = 0.21
+Viscosity Model & Polymer Type
+These flags are essential for enabling the non-Newtonian model.
+
+Matlab
+
+% Set viscosityFlag to 3 for the non-Newtonian model
+viscosityFlag = 3;
+% 3 = Dynamic Viscosity Model (Non-Newtonian)
+% 2 = Sourav's Model
+% 1 = Original JCP Model
+
+% Set the polymer type
+polymerType = 0;
+% 0 = Xanthane
+% 1 = Schizophyllan
+Note: The initial saturation profile shape is defined in get_phi_test, which calls z_func_test. Modify z_func_test to change the initial conditions from rectilinear to quarter-five spot.
+
+3. Run Simulation: Once your setup is configured, run master_surf_grid.m from MATLAB.
+
+A simulation with sog=29 may take 2-3 hours.
+
+Computational time increases exponentially with sog.
+
+4. Post-Processing: Analyze the results by plotting the main output variables: COC (cost of chemicals), MFW (mass fraction of water), CC (component 1 conc.), UU (saturation), and GG (component 2 conc.).
