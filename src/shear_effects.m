@@ -1,3 +1,6 @@
+%% Note: This is an archive model used during the shear thinning model research. Please do not use this.
+
+
 %% Code to implement shear effects of polymer on the EOR simulation
 %% Rohit Mishra
 %% 04/21/2019
