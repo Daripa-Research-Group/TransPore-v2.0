@@ -4,8 +4,6 @@ clc
 clear variables;
 clear global;
 format long
-%profile clear
-%profile on
 
 
 
