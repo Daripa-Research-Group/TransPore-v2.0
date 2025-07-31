@@ -87,9 +87,7 @@ for counter = 1:nsim %  3:4
     permeabilityFlag = 1;
     KKdef(counter,sizeofgrid,x,y,permeabilityFlag);
 
-%     KK = 100*KK;
     %-------------------------------------------------------------------
-    
     
     
     %%%%%%%%%%% Preparing automatic runs  %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -159,7 +157,7 @@ for counter = 1:nsim %  3:4
         innerIter = 0;
         epsilon = 10;
         %Solve elliptic equation.................................
-%        while(epsilon > 1e-4) 
+
         % IFT as a function of surf concentration
         % $$ \sigma = \frac{10.001}{\Gamma +1} - 0.001 $$
         sigma = 10.001./(GG+1)-0.001;
@@ -177,7 +175,7 @@ for counter = 1:nsim %  3:4
         end
         tSave = tcal+1;
         
-[mShear, nShear] = size(shear);
+        [mShear, nShear] = size(shear);
 
         % recompute residual saturations $$ s_{ra}, s_{ro} $$
         [swr,sor] = compres(sigma,u,v,miua);
@@ -217,18 +215,12 @@ for counter = 1:nsim %  3:4
     end
     innerIter = innerIter + 1;
     innerIterSave(tcal+1) = innerIter;
-%        end
-        
-        %miup_array = compvis(c0_array,u,v,x,y);
         if (shearFlag)
        [miua] = shear_effects(u,v,miua,x,y,c);
         end
         
         
         %Solve transport problem....................................
-        
-        
-%         [UU,CC,GG,OC,WC,ROIP]=nmmoc_surf_mod(u,v,UU,CC,GG,miua,para,sigma,c0,g0,src);
         
         [UU,CC,GG,OC,WC,ROIP]=nmmoc_surf_mod_neumann(u,v,UU,CC,GG,miua,para,sigma,c0,g0,src);
 
@@ -244,71 +236,14 @@ for counter = 1:nsim %  3:4
  
 
 %%%%%%%%%% Get Visualization of saturation/concentration profiles ---------
-    %       figure(1)
-            miua_plot = miua/max(max(miua));
-         % contourf(x,y,miua); 
-           % caxis([1.5,10])
-         %   colorbar; colormap jet;
-         %  drawnow  %for live view of figures during simulation
-            
 
-            
-     %       figure(2)
-            
-      %     contourf(x,y,UU); %shading flat; view(0,90);
-     %      colorbar; colormap jet;
- %          set(gca,'FontSize',18);
-%
-  %         title(tcal)
-             [iterX_save(tcal), MFW(tcal)]=postProcess_fingerWidthQFS(UU);
-%            [interface, MFW(tcal),iterX_save(tcal)]=postProcess_fingerWidth(UU);
-%            if tcal>1
-%            if(iterX_save(tcal) == iterX_save(tcal-1))
-%                MFW(tcal) = max(MFW(tcal-1),MFW(tcal));
-%            end
-%            end
-           %figure(3)
-           %plot(interface,1:29);
-            
-
-            %% Code to make a movie 
-            
-%           if counter == 1
-%                mov1(tcal) = getframe(gcf);
-%            elseif counter == 2
-%                mov2(tcal) = getframe(gcf);
-%            else
-%                mov3(tcal) = getframe(gcf);
-%            end
-            
-                        % pause
-
-
-% saveLocation = strcat('./LogData/interface',string(tcal));
-% 
-%           if rem(tcal,1)==0
-%                export_fig(sprintf('./Run%d/ST%dK%dx%d.jpeg', counter, tcal, size(KK,1),size(KK,2)),'-opengl');
-%            save(saveLocation,'interface','-ascii');
-%            end
-
-            
+            miua_plot = miua/max(max(miua));      
             if (rem(tcal,200) == 0)
                 k = k+1;
                 miuaTcal(:,k) = miua(15,:);
                 lambdaTcal(:,k) = lambda_a(:,15)./lambda_o(:,15);
-    %            disp('ViscData')
-    %            disp(tcal)
-    %            disp(miua(:,15))
-
-  
             end
-
-%             if (tcal == 500 || tcal == 1000 || tcal == 1500)
-%                 %hello
-%                 miuanew=miua';
-%                 tcal = tcal
-%             end
-%             
+       
 %%%%%%%%%%% ---------------------------------------------------------------
     end
     %%%% Time simulation loop ends here with water breakthrough or similar
