@@ -142,10 +142,10 @@ polymerType = 0;
 ```
 Note: The initial saturation profile shape is defined in get_phi_test, which calls z_func_test. Modify z_func_test to change the initial conditions from rectilinear to quarter-five spot.
 
-**3. Run Simulation: Once your setup is configured, run master_surf_grid.m from MATLAB.
+**3. Run Simulation**: Once your setup is configured, run master_surf_grid.m from MATLAB.
 
 A simulation with sog=29 may take 2-3 hours.
 
 Computational time increases exponentially with sog.
 
-**4. Post-Processing: Analyze the results by plotting the main output variables: COC (cost of chemicals), MFW (mass fraction of water), CC (component 1 conc.), UU (saturation), and GG (component 2 conc.).
+**4. Post-Processing**: Analyze the results by plotting the main output variables: COC (cost of chemicals), MFW (mass fraction of water), CC (component 1 conc.), UU (saturation), and GG (component 2 conc.).
