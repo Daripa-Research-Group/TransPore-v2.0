@@ -32,7 +32,7 @@ If you use this code in your research, please cite the relevant publications:
 
 ### Primary Source File
 The main file for setting up and running simulations. Most parameters are configured here.
-* `Master_surf_grid.m`
+* `master_surf_grid.m`
 
 ### Secondary Source Files
 These files contain helper functions called by the master script.
