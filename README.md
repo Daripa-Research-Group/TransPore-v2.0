@@ -7,7 +7,7 @@ A FEM-FDM solver for two-phase, multicomponent transport in porous media. This v
 ## 📋 General Information
 * **Requirements**: MATLAB R2017a or higher on Windows, Linux, or macOS.
 * **Contact**: For questions or support, please email `daripa@math.tamu.edu`.
-* **Copyright**: © 2010-2018 TransPore developers and contributors. All rights reserved.
+* **Copyright**: © 2010-2025 TransPore developers and contributors. All rights reserved.
 
 ---
 
