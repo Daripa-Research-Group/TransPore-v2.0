@@ -1,4 +1,4 @@
-# TransPore Version 1.1  
+# TransPore Version 2.0  
 
 A FEM-FDM solver for two-phase, multicomponent transport in porous media with data driven non-Newtonian viscosity calculation for polymer.
 
