@@ -77,20 +77,19 @@ Set the number of simulations (`nsim`) and the grid size (`sog`). The domain is 
 nsim = 1;
 sog = 29; % Sets the number of mesh cells (e.g., 29x29)
 sizeofgrid = [sog sog sog sog];
+```
+
 Injected Fluid Concentrations
 Define the initial concentrations for each component for each simulation.
-
-Matlab
-
+```matlab
 % c0iter: Polymer concentration (e.g., 0.001 = 1500 wppm)
 c0iter = [0.001 0 0 0.001];
 % g0iter: Surfactant concentration
 g0iter = [0 0 0 0];
+```
 Injection Rate & Well Geometry
 src determines the injection rate (IR). The geometry (well placement) can be set to rectilinear or quarter-five spot.
-
-Matlab
-
+```maltb
 % Recommended range: 10,000 to 120,000
 src = 120000;
 
@@ -102,11 +101,12 @@ f(:,para.box.m+1) = -src; % Production well
 %% Quarter-five spot
 % f(1,1) = src;                                % Injection well
 % f(para.box.n+1,para.box.m+1) = -src;         % Production well
+```
+
 Permeability Profile
 Use the permeabilityFlag to select the domain's permeability profile.
 
-Matlab
-
+```matlab
 % 1 = Homogeneous (1000 mD)
 % 2 = Continuous heterogeneous function
 % 3 = Impermeable block at the center
@@ -115,18 +115,20 @@ Matlab
 % 6 = Tarbert (from SPE10 model)
 permeabilityFlag = 3;
 KKdef(counter, sizeofgrid, x, y, permeabilityFlag);
+```
+
 Initial Water Saturation
 The value 1-s0 defines the initial water saturation in the reservoir.
 
-Matlab
-
+```matlab
 s0 = 0.79; % Initial oil saturation
 % Corresponds to an initial water saturation of 1 - 0.79 = 0.21
+```
+
 Viscosity Model & Polymer Type
 These flags are essential for enabling the non-Newtonian model.
 
-Matlab
-
+```matlab
 % Set viscosityFlag to 3 for the non-Newtonian model
 viscosityFlag = 3;
 % 3 = Dynamic Viscosity Model (Non-Newtonian)
@@ -137,12 +139,13 @@ viscosityFlag = 3;
 polymerType = 0;
 % 0 = Xanthane
 % 1 = Schizophyllan
+```
 Note: The initial saturation profile shape is defined in get_phi_test, which calls z_func_test. Modify z_func_test to change the initial conditions from rectilinear to quarter-five spot.
 
-3. Run Simulation: Once your setup is configured, run master_surf_grid.m from MATLAB.
+**3. Run Simulation: Once your setup is configured, run master_surf_grid.m from MATLAB.
 
 A simulation with sog=29 may take 2-3 hours.
 
 Computational time increases exponentially with sog.
 
-4. Post-Processing: Analyze the results by plotting the main output variables: COC (cost of chemicals), MFW (mass fraction of water), CC (component 1 conc.), UU (saturation), and GG (component 2 conc.).
+**4. Post-Processing: Analyze the results by plotting the main output variables: COC (cost of chemicals), MFW (mass fraction of water), CC (component 1 conc.), UU (saturation), and GG (component 2 conc.).
