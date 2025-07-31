@@ -21,9 +21,10 @@ This research was made possible by funding from:
 ## 📚 Citing this Work
 If you use this code in your research, please cite the relevant publications:
 
-1.  **Daripa, P. & Mishra, R. (2023).** Modelling shear thinning polymer flooding using a dynamic viscosity model. *arXiv preprint arXiv:2301.04290*.
-2.  **Daripa, P. & Dutta, S. (2017).** Modeling and simulation of surfactant–polymer flooding using a new hybrid method. *Journal of Computational Physics, 335*, 249–282. [https://doi.org/10.1016/j.jcp.2017.01.038](https://doi.org/10.1016/j.jcp.2017.01.038)
-3.  **Daripa, P. & Dutta, S. (2019).** On the convergence analysis of a hybrid method for multicomponent transport in porous media. *Applied Numerical Mathematics, 146*, 199-220. [https://doi.org/10.1016/j.apnum.2019.07.009](https://doi.org/10.1016/j.apnum.2019.07.009)
+1.  **Daripa, P. & Mishra, R. (2023).** Modelling shear thinning polymer flooding using a dynamic viscosity model. *Physics of Fluids, 35(4)*. [https://doi.org/10.1063/5.0145061](https://doi.org/10.1063/5.0145061)
+2.  **Daripa, P. & Mishra, R. (2023).** Modelling shear thinning polymer flooding using a dynamic viscosity model. *arXiv preprint arXiv:2301.04290*.
+3.  **Daripa, P. & Dutta, S. (2017).** Modeling and simulation of surfactant–polymer flooding using a new hybrid method. *Journal of Computational Physics, 335*, 249–282. [https://doi.org/10.1016/j.jcp.2017.01.038](https://doi.org/10.1016/j.jcp.2017.01.038)
+4.  **Daripa, P. & Dutta, S. (2019).** On the convergence analysis of a hybrid method for multicomponent transport in porous media. *Applied Numerical Mathematics, 146*, 199-220. [https://doi.org/10.1016/j.apnum.2019.07.009](https://doi.org/10.1016/j.apnum.2019.07.009)
 
 ---
 
