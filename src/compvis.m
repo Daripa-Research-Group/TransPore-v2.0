@@ -29,11 +29,11 @@ switch viscosityFlag
     case 3        
         % Dynamic Viscosity Model (Non-Newtonian Model)
         rho_water = 1000;
-        rho_xanthane = 1500;
-        w1=rho_xanthane * c;
+        rho_polymer = 1500;
+        w1=rho_polymer * c;
         w2=rho_water*(1-c);
         wppm = ((w1)./ (w1 +w2))*1e6;
-        w10 = rho_xanthane * c0_array;
+        w10 = rho_polymer * c0_array;
         w20=rho_water*(1-c0_array);
         wppm0 = ((w10)./ (w10 +w20))*1e6;
         
