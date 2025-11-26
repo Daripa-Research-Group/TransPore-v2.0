@@ -79,5 +79,48 @@
     <span class="close-btn">&times;</span>
     <img id="lightbox-img" class="lightbox-content" src="" alt="Full screen view">
 </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Get references to elements
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close-btn');
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+
+    // 1. Open Lightbox when any gallery image is clicked
+    galleryImages.forEach(img => {
+        img.addEventListener('click', (e) => {
+            // Set the lightbox image source to the clicked image's source
+            lightboxImg.src = e.target.src;
+            // Show the lightbox (using flex to activate the CSS centering)
+            lightbox.style.display = 'flex';
+        });
+    });
+
+    // 2. Close Lightbox function
+    const closeLightbox = () => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = ''; // Clear src to stop playing gif (optional)
+    };
+
+    // Close when clicking the "X" button
+    closeBtn.addEventListener('click', closeLightbox);
+
+    // Close when clicking anywhere in the dark background
+    lightbox.addEventListener('click', (e) => {
+        // If the click is NOT on the image itself, close the modal
+        if (e.target !== lightboxImg) {
+            closeLightbox();
+        }
+    });
+
+    // Optional: Close when pressing 'Escape' key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+            closeLightbox();
+        }
+    });
+});
+</script>
 </body>
 </html>
